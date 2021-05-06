@@ -7,16 +7,21 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import br.com.luanadev.tiptime.databinding.ActivityMainBinding
+import by.kirich1409.viewbindingdelegate.viewBinding
 import java.text.NumberFormat
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    private val binding by viewBinding {
+        ActivityMainBinding.inflate(layoutInflater)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        initCalculate()
+    }
+    private fun initCalculate(){
         binding.calculateButton.setOnClickListener { calculateTip() }
         binding.costOfServiceEditText.setOnKeyListener { view, keyCode, _ ->
             handleKeyEvent(
